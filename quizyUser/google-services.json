@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "227314081571",
+    "project_id": "quizy-c49d7",
+    "storage_bucket": "quizy-c49d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227314081571:android:8e5ff997614b6067daf696",
+        "android_client_info": {
+          "package_name": "com.march.quizyHost"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227314081571-vr2suanotea1mve02ljp47434ko99loj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq3PXj5NSNDADcu9oysxbQDHSnpxNc4Lc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227314081571-vr2suanotea1mve02ljp47434ko99loj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227314081571:android:bcf28a13a767a1ffdaf696",
+        "android_client_info": {
+          "package_name": "com.march.quizyUser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227314081571-vr2suanotea1mve02ljp47434ko99loj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq3PXj5NSNDADcu9oysxbQDHSnpxNc4Lc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227314081571-vr2suanotea1mve02ljp47434ko99loj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

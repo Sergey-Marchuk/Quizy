@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Quizy</string>
+
+    <string name="firebase_error">Щось пішло не так, перевірте інтернет зв\'язок</string>
+    <string name="wait_for_start">Зачекайте поки хост розпочне опитування</string>
+    <string name="choose_answer">Оберіть відповідь, залишилось %dс!</string>
+    <string name="input_name">Введіть ім\'я</string>
+    <string name="confirm">Підтвердити</string>
+    <string name="cancel">Відміна</string>
+    <string name="answer_confirmed">Ваша відповідь прийнята</string>
+    <string name="empty_answers">Немає доступних опитувань</string>
+    <string name="question">Питання: %s</string>
+</resources>

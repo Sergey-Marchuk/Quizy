@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Quizy Host</string>
+
+    <string name="question_hint">Введіть питання (опціонально)</string>
+    <string name="answers_count">*Кількість варіантів відповіді</string>
+    <string name="time_hint">*Введіть час (секунди)</string>
+    <string name="start_quiz">Розпочати опитування</string>
+    <string name="create_quiz">Створити опитування</string>
+    <string name="correct_answer">*Правильна відповідь</string>
+    <string name="quiz_id_hint">*Введіть ідентифікатор опитування</string>
+    <string name="quiz_id_error">Ідентифікатор не повинен бути пустим</string>
+    <string name="quiz_time_error">Час повинен бути >= 5 секунд</string>
+    <string name="firebase_error">Щось пішло не так, перевірте інтернет зв\'язок</string>
+    <string name="participants">Учасники: </string>
+    <string name="time_left">Часу залишилось: %dc.</string>
+    <string name="finish_quiz">Зваершити опитування</string>
+    <string-array name="answers_numbers">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+</resources>
