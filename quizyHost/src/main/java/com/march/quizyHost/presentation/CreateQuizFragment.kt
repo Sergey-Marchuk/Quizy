@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -20,6 +21,7 @@ import kotlinx.android.synthetic.main.fragment_create_quiz.*
 class CreateQuizFragment : Fragment() {
 
     private lateinit var viewModel: CreateQuizViewModel
+    private lateinit var answersET: ArrayList<TextInputEditText>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,9 +35,11 @@ class CreateQuizFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        answersET = arrayListOf(answer1ET, answer2ET, answer3ET, answer4ET, answer5ET, answer6ET)
         initListeners()
         initAnswersDropdown()
         invalidateCorrectAnswerDropdown()
+        initAnswersListeners()
     }
 
     private fun initListeners() {
@@ -47,11 +51,13 @@ class CreateQuizFragment : Fragment() {
         answersCountATV.onItemSelected{
             viewModel.setAnswersCount(it)
             invalidateCorrectAnswerDropdown()
+            invalidateAnswersFieldsVisibility()
         }
         viewModel.onValidationError = {
             when(it) {
                 CreateQuizError.QUIZ_TIME -> timeET.error = resources.getString(it.errorResId)
                 CreateQuizError.QUIZ_ID -> quizIdET.error = resources.getString(it.errorResId)
+                CreateQuizError.ANSWER_ERROR -> answersET[it.index].error = resources.getString(it.errorResId)
                 else -> Toast.makeText(context, resources.getString(it.errorResId), Toast.LENGTH_LONG).show()
             }
         }
@@ -64,18 +70,33 @@ class CreateQuizFragment : Fragment() {
 
     private fun initAnswersDropdown() {
         val answers = resources.getStringArray(R.array.answers_numbers).drop(1)
-        val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_dropdown_item_1line, answers)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, answers)
         answersCountATV.setAdapter(adapter)
         answersCountATV.setText(answers[0], false)
+    }
+
+    private fun initAnswersListeners() {
+        answersET.forEachIndexed { index, field ->
+            field.doAfterTextChanged { viewModel.setAnswerText(index, it?.toString() ?: "") }
+        }
     }
 
     private fun invalidateCorrectAnswerDropdown() {
         val answersCount = answersCountATV.text.toString().toInt()
         var answers = resources.getStringArray(R.array.answers_numbers)
         answers = answers.dropLast(answers.size - answersCount).toTypedArray()
-        val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_dropdown_item_1line, answers)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, answers)
         correctAnswerATV.setAdapter(adapter)
         correctAnswerATV.setText(answers[0], false)
+    }
+
+    private fun invalidateAnswersFieldsVisibility() {
+        val answersCount = answersCountATV.text.toString().toInt()
+        val answers = resources.getStringArray(R.array.answers_numbers)
+        answersET.forEachIndexed { index, field ->
+            field.setText(answers[index])
+            (field.parent.parent as View).isVisible = index < answersCount
+        }
     }
 
     private fun TextInputEditText.onTextChanged(listener: (String) -> Unit) {

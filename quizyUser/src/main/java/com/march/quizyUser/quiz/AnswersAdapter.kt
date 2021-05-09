@@ -7,8 +7,8 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 
-class AnswersAdapter(private val clickListener: (Int) -> Unit,
-                     private val answersCount: Int): RecyclerView.Adapter<AnswersAdapter.AnswerViewHolder>() {
+class AnswersAdapter(private val clickListener: (String) -> Unit,
+                     private val answers: List<String>): RecyclerView.Adapter<AnswersAdapter.AnswerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnswerViewHolder {
         val view = Button(parent.context)
@@ -17,17 +17,18 @@ class AnswersAdapter(private val clickListener: (Int) -> Unit,
     }
 
     override fun onBindViewHolder(holder: AnswerViewHolder, position: Int) {
-        holder.bindButton((position + 1).toString())
+        holder.bindButton(answers[position])
     }
 
-    override fun getItemCount(): Int = answersCount
+    override fun getItemCount(): Int = answers.size
 
     inner class AnswerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
         init {
             itemView.setOnClickListener {
                 val text = (this.itemView as Button).text.toString()
-                clickListener.invoke(text.toInt()) }
+                clickListener.invoke(text)
+            }
         }
 
         fun bindButton(text: String) {

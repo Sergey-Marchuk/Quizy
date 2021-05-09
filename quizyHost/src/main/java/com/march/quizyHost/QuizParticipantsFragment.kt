@@ -53,6 +53,7 @@ class QuizParticipantsFragment : Fragment() {
     }
 
     private fun subscribeOnParticipants() {
+        adapter.setAnswers(viewModel.quizSettings.answers)
         viewModel.participants.observe(this) {
             adapter.updateParticipants(it)
         }

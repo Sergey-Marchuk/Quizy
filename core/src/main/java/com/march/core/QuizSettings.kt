@@ -13,7 +13,9 @@ data class QuizSettings(
     var answersCount: Int = 4,
     var correctAnswer: Int = 0,
     var status: QuizStatus = QuizStatus.NEW,
-    var currentTime: Long = time): Parcelable
+    var currentTime: Long = time,
+    var answers: ArrayList<String> = arrayListOf("1", "2", "3", "4", "5", "6")
+): Parcelable
 
 enum class QuizStatus {
     NEW, STARTED, COMPLETED

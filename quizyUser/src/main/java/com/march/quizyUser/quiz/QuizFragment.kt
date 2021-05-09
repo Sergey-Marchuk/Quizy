@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.march.core.Participant
 import com.march.core.QuizSettings
 import com.march.core.QuizStatus
@@ -54,8 +55,10 @@ class QuizFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        answersRV.layoutManager = GridLayoutManager(context, 2)
-        answersRV.adapter = AnswersAdapter(this::onAnswerClicked, viewModel.quizSettings.answersCount)
+        answersRV.layoutManager = LinearLayoutManager(context)
+        val answers = viewModel.quizSettings.answers.toMutableList().subList(0, viewModel.quizSettings.answersCount)
+        answers.shuffle()
+        answersRV.adapter = AnswersAdapter(this::onAnswerClicked, answers)
     }
 
     private fun restoreInstanceState() {
@@ -65,7 +68,7 @@ class QuizFragment : Fragment() {
         }
     }
 
-    private fun onAnswerClicked(answer: Int) {
+    private fun onAnswerClicked(answer: String) {
         viewModel.sendAnswer(answer)
     }
 

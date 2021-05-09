@@ -14,7 +14,6 @@ class CreateQuizViewModel: ViewModel() {
     var onValidationError: ((CreateQuizError) -> Unit)? = null
     var onNavigateNext: ((QuizSettings) -> Unit)? = null
 
-
     fun setQuizId(quizId: String) {
         quizSettings.quizId = quizId
     }
@@ -32,7 +31,11 @@ class CreateQuizViewModel: ViewModel() {
     }
 
     fun setCorrectAnswer(correctAnswer: String) {
-        quizSettings.correctAnswer = correctAnswer.toInt()
+        quizSettings.correctAnswer = correctAnswer.toInt() - 1
+    }
+
+    fun setAnswerText(index: Int, text: String) {
+        quizSettings.answers[index] = text
     }
 
     fun createQuiz() {
@@ -57,9 +60,20 @@ class CreateQuizViewModel: ViewModel() {
             isValidationCorrect = false
         }
 
-        if (quizSettings.time < 5) {
+        if (quizSettings.time < 5000) {
             onValidationError?.invoke(CreateQuizError.QUIZ_TIME)
             isValidationCorrect = false
+        }
+
+        for (i in 0 until quizSettings.answersCount) {
+            val answer = quizSettings.answers.getOrNull(i)
+            if (answer.isNullOrEmpty()) {
+                val error = CreateQuizError.ANSWER_ERROR
+                error.index = i
+                onValidationError?.invoke(error)
+                isValidationCorrect = false
+                break
+            }
         }
 
         return isValidationCorrect

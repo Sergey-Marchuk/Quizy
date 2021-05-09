@@ -11,9 +11,16 @@
     <string name="quiz_id_error">Ідентифікатор не повинен бути пустим</string>
     <string name="quiz_time_error">Час повинен бути >= 5 секунд</string>
     <string name="firebase_error">Щось пішло не так, перевірте інтернет зв\'язок</string>
+    <string name="answer_error">Введіть питання</string>
     <string name="participants">Учасники: </string>
     <string name="time_left">Часу залишилось: %dc.</string>
     <string name="finish_quiz">Зваершити опитування</string>
+    <string name="answer_hint_1">*Введіть 1 варіант відповіді</string>
+    <string name="answer_hint_2">*Введіть 2 варіант відповіді</string>
+    <string name="answer_hint_3">*Введіть 3 варіант відповіді</string>
+    <string name="answer_hint_4">*Введіть 4 варіант відповіді</string>
+    <string name="answer_hint_5">*Введіть 5 варіант відповіді</string>
+    <string name="answer_hint_6">*Введіть 6 варіант відповіді</string>
     <string-array name="answers_numbers">
         <item>1</item>
         <item>2</item>

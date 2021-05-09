@@ -1,6 +1,7 @@
 package com.march.quizyHost
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import kotlinx.android.synthetic.main.item_participant.view.*
 class ParticipantsAdapter(private val correctAnswer: Int): RecyclerView.Adapter<ParticipantsAdapter.ParticipantViewHolder>() {
 
     private val participants = ArrayList<Participant>()
+    private val answers = ArrayList<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParticipantViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_participant, parent, false)
@@ -30,8 +32,11 @@ class ParticipantsAdapter(private val correctAnswer: Int): RecyclerView.Adapter<
     fun updateParticipants(participants: List<Participant>) {
         this.participants.clear()
         this.participants.addAll(participants)
-        Log.e("TAG", "updateParticipants")
         notifyDataSetChanged()
+    }
+
+    fun setAnswers(answers: List<String>) {
+        this.answers.addAll(answers)
     }
 
     inner class ParticipantViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -39,10 +44,17 @@ class ParticipantsAdapter(private val correctAnswer: Int): RecyclerView.Adapter<
         fun bindParticipant(participant: Participant) {
             itemView.nameTV.text = participant.name
             val answer = participant.answer
-            Log.e("TAG", answer.toString())
-            itemView.answerTV.text = answer.toString()
-            itemView.answerTV.isVisible = answer > 0
-            itemView.answerTV.setTextColor(getAnswerColor(itemView.context, answer))
+            if (answer >= 0) {
+                itemView.answerTV.text = answers[answer]
+            }
+
+            itemView.answerTV.visibility = if (answer >= 0) View.VISIBLE else View.INVISIBLE
+            val answerColor = getAnswerColor(itemView.context, answer)
+            itemView.answerTV.setTextColor(answerColor)
+            val drawableRes = if (answer == correctAnswer) R.drawable.ic_correct else R.drawable.ic_wrong
+            itemView.answerIV.setImageDrawable(itemView.context.getDrawable(drawableRes))
+            itemView.answerIV.imageTintList = ColorStateList.valueOf(answerColor)
+            itemView.answerIV.isVisible = answer >= 0
         }
 
         private fun getAnswerColor(context: Context, answer: Int): Int {
