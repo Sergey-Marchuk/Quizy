@@ -67,7 +67,7 @@ class QuizzesFragment : Fragment() {
         viewModel.quizzesListener = object: FirebaseQuizzesListener {
             override fun onQuizzesGot(quizzes: List<QuizSettings>) {
                 quizzesAdapter.setItems(quizzes)
-                hintTV.isVisible = quizzes.isEmpty()
+                hintTV?.isVisible = quizzes.isEmpty()
             }
 
             override fun onFailure() {
